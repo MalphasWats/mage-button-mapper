@@ -14,6 +14,21 @@ There are a few issues with doing it this way - in particular, the slight differ
 
 Taking some more time to map out different resistor values and using ones with better tolerances would help, however, by the time it goes from a breadboard to a PCB, the whole thing ends up changing. Ultimately, I am planning to use a microcontroller with more pins which would allow 1 pin per button, but I'm happy with this solution for now.
 
+Using the ADC actually turns out to be pretty easy:
+
+```
+ADMUX = 0x00 | 2;                               // Activate ADC2 (Pin 4)
+
+ADCSRA = 0xC7;                                  // Begin conversion
+    
+while(ADCSRA & (1<<ADSC));                      // Wait for conversion to finish
+    
+unsigned char low = ADCL;                       // Collect bottom 8 bits of value
+unsigned char high = ADCH;                      // Collect remaining 2 bits
+    
+unsigned int btn_value = (high << 8) | low;     // Shift high byte up, or with low byte
+```
+
 Typical ADC values look like this:
 
 ```
