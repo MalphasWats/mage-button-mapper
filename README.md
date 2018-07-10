@@ -1,6 +1,6 @@
 # mage-button-mapper
 
-Quick program for mapping the ADC values for buttons
+Quick program for mapping the ADC values for buttons in my [Mage project](https://github.com/MalphasWats/Mage).
 
 Because I'm working with a microcontroller with only 5 usable I/O pins, I had to be creative with how to have multiple buttons.
 
